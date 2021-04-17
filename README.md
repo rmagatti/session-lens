@@ -1,25 +1,52 @@
+<!-- Finish README -->
 # Description
-Auto Session takes advantage of Neovim's existing session management capabilities to provide seamless automatic session management.
+Session Lens extends [auto-session](https://github.com/rmagatti/auto-session) through Telescope.nvim, creating a simple session switcher with fuzzy finding capabilities.
+
+<!-- TODO: use correct gif -->
+<img src="https://github.com/rmagatti/readme-assets/blob/main/session-lens.gif" width="1000" />
+
+# Usage
+You can call the switcher from telescope
+```viml
+:Telescope session-lens search_session
+```
+
+Or straight from the plugin's path with lua
+```viml
+:lua require('telescope._extensions.session-lens.main').search_session()
+```
 
 # Installation
-Any plugin manager should do, I use https://github.com/junegunn/vim-plug
+Any plugin manager should do, I use [Plug](https://github.com/junegunn/vim-plug).
 
-`Plug 'ronniemagatti/auto-session'`
+`Plug 'rmagatti/session-lens'`
+
+The plugin is lazy loaded when calling it for the first time but you can pre-load it with Telescope like this if you'd rather have autocomplete for it off the bat.
+```lua
+require("telescope").load_extension("session-lens")
+```
 
 # Configuration
 
-### Default
-Auto Session by default uses the directory `~/.config/nvim/sessions/` to store sessions.
-
 ### Custom
-Use `let g:auto_session_root_dir = path/to/my/custom/dir` to set a custom directory for sessions. 
-:warning: WARNING :warning: the directory must already exist or the plugin will not load and exit with an error.
+One can set the auto\_session root dir that will be used for auto session saving and restoring.
+```lua
+require('session-lens').setup {
+    sorten_path=<true|false>,
+}
+```
+:warning: WARNING :warning: If the directory does not exist, default directory will be used and an error message will be printed.
 
 # Commands
-Auto Session exposes two commands that can be used or mapped to any keybindings for manually saving and restoring sessions.
-```vimscript
-:SaveSession " saves or creates a session in the currently set `auto_session_root_dir`.
-:RestoreSession " restores a previously saved session based on the `cwd`.
-```
+Session Lens exposes one command
+- `:SearchSession` triggers the customized session picker
 
-Note: the plugin uses these same functions internally for the automatic behaviour wrapping it with only a few extra checks for consistency.
+# Compatibility
+Neovim > 0.5
+
+Tested with:
+```
+NVIM v0.5.0-dev+a1ec36f
+Build type: Release
+LuaJIT 2.1.0-beta3
+```
