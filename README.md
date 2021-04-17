@@ -32,7 +32,7 @@ require("telescope").load_extension("session-lens")
 One can set the auto\_session root dir that will be used for auto session saving and restoring.
 ```lua
 require('session-lens').setup {
-    sorten_path=<true|false>,
+    shorten_path=<true|false>,
 }
 ```
 :warning: WARNING :warning: If the directory does not exist, default directory will be used and an error message will be printed.
