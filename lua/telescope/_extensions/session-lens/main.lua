@@ -8,7 +8,7 @@ local SessionLens = {
 }
 
 local defaultConf = {
-  theme_conf = { winblend = 10, border = true, previewer =false },
+  theme_conf = { winblend = 10, border = true, previewer = false },
   shorten_path = true
 }
 
@@ -24,11 +24,14 @@ local themes = require('telescope.themes')
 local actions = require('telescope.actions')
 
 SessionLens.search_session = function(custom_opts)
+  custom_opts = (Lib.isEmptyTable(custom_opts) or custom_opts == nil) and SessionLens.conf or custom_opts
+
+  -- Use auto_session_root_dir from the Auto Session plugin
   local cwd = AutoSession.conf.auto_session_root_dir
-  local shorten_path = custom_opts.shorten_path or SessionLens.conf.shorten_path
-  local theme_opts = themes.get_dropdown(SessionLens.conf.theme_conf)
+
+  local shorten_path = custom_opts.shorten_path
+  local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
   local opts = {
-    shorten_path = shorten_path,
     prompt_title = 'Sessions',
     entry_maker = Lib.make_entry.gen_from_file({cwd = cwd, shorten_path = shorten_path}),
     cwd = cwd,
@@ -40,7 +43,9 @@ SessionLens.search_session = function(custom_opts)
     end,
   }
 
-  require("telescope.builtin").find_files(vim.tbl_deep_extend("force", opts, theme_opts, custom_opts or {}))
+  local find_files_conf = vim.tbl_deep_extend("force", opts, theme_opts, custom_opts or {})
+
+  require("telescope.builtin").find_files(find_files_conf)
 end
 
 return SessionLens
