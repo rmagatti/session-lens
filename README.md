@@ -31,7 +31,7 @@ require("telescope").load_extension("session-lens")
 ### Custom
 One can set the auto\_session root dir that will be used for auto session saving and restoring.
 ```lua
-require('session-lens').setup {
+require('telescope._extensions.session-lens').setup {
     shorten_path=<true|false>,
 }
 ```
