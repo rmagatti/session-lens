@@ -40,10 +40,13 @@ Another example would be changing how the dropdown looks, this can be done by se
 The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf)`, so anything supported by `get_dropdown` can be used here as well.
 ```lua
 require('telescope._extensions.session-lens').setup {
-  shorten_path = true,
-  theme_conf = { previewer = true, border = false }
+  shorten_path = false,
+  theme_conf = { border = false },
+  previewer = true
 }
 ```
+👇
+<img width="1000" alt="Screen Shot 2021-04-17 at 9 17 43 PM" src="https://user-images.githubusercontent.com/2881382/115133046-5eed1680-9fc2-11eb-9bda-dd80d649e761.png">
 
 In addition to the above configs, since everything gets passed into `telescope.builtin.find_files`, any configs passed to the `setup` if supported by `find_files` will override the default behaviour, for example:
 ```lua
@@ -51,8 +54,8 @@ require('telescope._extensions.session-lens').setup {
     prompt_title = 'YEAH SESSIONS',
 }
 ```
-^ This config results in this:
-<img width="1792" alt="Screen Shot 2021-04-17 at 8 16 49 PM" src="https://user-images.githubusercontent.com/2881382/115132025-d9fdff00-9fb9-11eb-8549-22a7131a3d59.png">
+👇
+<img width="1000" alt="Screen Shot 2021-04-17 at 8 16 49 PM" src="https://user-images.githubusercontent.com/2881382/115132025-d9fdff00-9fb9-11eb-8549-22a7131a3d59.png">
 
 
 # Commands
