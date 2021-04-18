@@ -35,7 +35,6 @@ require('telescope._extensions.session-lens').setup {
     shorten_path=<true|false>,
 }
 ```
-:warning: WARNING :warning: If the directory does not exist, default directory will be used and an error message will be printed.
 
 # Commands
 Session Lens exposes one command
