@@ -1,5 +1,5 @@
 <!-- Finish README -->
-# Description
+# Session Lens
 Session Lens extends [auto-session](https://github.com/rmagatti/auto-session) through Telescope.nvim, creating a simple session switcher with fuzzy finding capabilities.
 
 <!-- TODO: use correct gif -->
