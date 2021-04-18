@@ -33,8 +33,13 @@ SessionLens.search_session = function(custom_opts)
 
   local shorten_path = custom_opts.shorten_path
   local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
-  custom_opts["shorten_path"] = nil
   custom_opts["theme_conf"] = nil
+
+  -- Ignore last session dir on finder if feature is enabled
+  if AutoSession.conf.auto_session_enable_last_session then
+    local last_session_dir = AutoSession.conf.auto_session_last_session_dir:gsub(cwd, "")
+    custom_opts["file_ignore_patterns"] = {last_session_dir}
+  end
 
   -- Use default previewer config by setting the value to nil if some sets previewer to true in the custom config.
   -- Passing in the boolean value errors out in the telescope code with the picker trying to index a boolean instead of a table.
@@ -56,7 +61,6 @@ SessionLens.search_session = function(custom_opts)
   }
 
   local find_files_conf = vim.tbl_deep_extend("force", opts, theme_opts, custom_opts or {})
-
   require("telescope.builtin").find_files(find_files_conf)
 end
 
