@@ -24,8 +24,8 @@ local themes = require('telescope.themes')
 local actions = require('telescope.actions')
 
 SessionLens.search_session = function(custom_opts)
-  local cwd = AutoSession.conf.root_dir
-  local shorten_path = SessionLens.conf.shorten_path
+  local cwd = AutoSession.conf.auto_session_root_dir
+  local shorten_path = custom_opts.shorten_path or SessionLens.conf.shorten_path
   local theme_opts = themes.get_dropdown(SessionLens.conf.theme_conf)
   local opts = {
     shorten_path = shorten_path,
