@@ -29,12 +29,31 @@ require("telescope").load_extension("session-lens")
 # Configuration
 
 ### Custom
-One can set the auto\_session root dir that will be used for auto session saving and restoring.
+Options can be set by calling the setup function, a common option is changing the shorten path behaviour.
 ```lua
 require('telescope._extensions.session-lens').setup {
     shorten_path=<true|false>,
 }
 ```
+
+Another example would be changing how the dropdown looks, this can be done by setting the `theme_conf` in the setup opts.
+The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf), so anything supported by it can be used here as well.
+```lua
+require('telescope._extensions.session-lens').setup {
+  shorten_path = true,
+  theme_conf = { previewer = true, border = false }
+}
+```
+
+In addition to the above configs, since everything gets passed into `telescope.builtin.find_files`, any configs passed to the `setup` if supported by `find_files` will override the default behaviour, for example:
+```lua
+require('telescope._extensions.session-lens').setup {
+    prompt_title = 'YEAH SESSIONS',
+}
+```
+^ This config results in this:
+<img width="1792" alt="Screen Shot 2021-04-17 at 8 16 49 PM" src="https://user-images.githubusercontent.com/2881382/115132025-d9fdff00-9fb9-11eb-8549-22a7131a3d59.png">
+
 
 # Commands
 Session Lens exposes one command
