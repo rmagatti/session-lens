@@ -19,7 +19,15 @@ Or straight from the plugin's path with lua
 # Installation
 Any plugin manager should do, I use [Plug](https://github.com/junegunn/vim-plug).
 
-`Plug 'rmagatti/session-lens'`
+```viml
+" Dependencies
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'rmagatti/auto-session'
+
+Plug 'rmagatti/session-lens'
+```
 
 The plugin is lazy loaded when calling it for the first time but you can pre-load it with Telescope like this if you'd rather have autocomplete for it off the bat.
 ```lua
