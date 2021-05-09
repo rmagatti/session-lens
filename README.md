@@ -13,12 +13,13 @@ You can call the switcher from telescope
 
 Or straight from the plugin's path with lua
 ```viml
-:lua require('telescope._extensions.session-lens.main').search_session()
+:lua require('session-lens').search_session()
 ```
 
 # Installation
-Any plugin manager should do, I use [Plug](https://github.com/junegunn/vim-plug).
+Any plugin manager should do.
 
+Plug
 ```viml
 " Dependencies
 Plug 'nvim-lua/popup.nvim'
@@ -27,6 +28,17 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'rmagatti/auto-session'
 
 Plug 'rmagatti/session-lens'
+```
+
+Packer
+```lua
+use {
+  'rmagatti/session-lens',
+  requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+  config = function()
+    require('session-lens').setup({--[[your custom config--]]})
+  end
+}
 ```
 
 The plugin is lazy loaded when calling it for the first time but you can pre-load it with Telescope like this if you'd rather have autocomplete for it off the bat.
@@ -39,7 +51,7 @@ require("telescope").load_extension("session-lens")
 ### Custom
 Options can be set by calling the setup function, a common option is changing the shorten path behaviour.
 ```lua
-require('telescope._extensions.session-lens').setup {
+require('session-lens').setup {
     shorten_path=<true|false>,
 }
 ```
@@ -47,7 +59,7 @@ require('telescope._extensions.session-lens').setup {
 Another example would be changing how the dropdown looks, this can be done by setting the `theme_conf` in the setup opts.
 The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf)`, so anything supported by `get_dropdown` can be used here as well.
 ```lua
-require('telescope._extensions.session-lens').setup {
+require('session-lens').setup {
   shorten_path = false,
   theme_conf = { border = false },
   previewer = true
@@ -58,7 +70,7 @@ require('telescope._extensions.session-lens').setup {
 
 In addition to the above configs, since everything gets passed into `telescope.builtin.find_files`, any configs passed to the `setup` if supported by `find_files` will override the default behaviour, for example:
 ```lua
-require('telescope._extensions.session-lens').setup {
+require('session-lens').setup {
     prompt_title = 'YEAH SESSIONS',
 }
 ```

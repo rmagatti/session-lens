@@ -8,6 +8,7 @@ SessionLensActions.source_session = function(prompt_bufnr)
   local selection = action_state.get_selected_entry()
   actions.close(prompt_bufnr)
   AutoSession.SaveSession()
+  vim.cmd("%bd!")
   AutoSession.RestoreSession(selection.path)
 end
 
