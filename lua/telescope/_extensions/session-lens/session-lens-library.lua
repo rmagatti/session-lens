@@ -93,7 +93,19 @@ do
     mt_file_entry.display = function(entry)
       -- Revert session files back to paths for easier reading
       -- This affects the display only, a selection still uses the correct file name.
-      local display = path.make_relative((entry.value:gsub("%%", "/")), cwd)
+      local display = ''
+      if vim.fn.has('win32')==1 then
+        local entry_value = entry.value:gsub("%++", ":")
+        entry_value = entry_value:gsub("%%", "/")
+        display = path.make_relative((entry_value), cwd)
+      else
+        display = path.make_relative((entry.value:gsub("%%", "/")), cwd)
+      end
+      -- there problem with telescope path_shorten() for windows
+      if vim.fn.has('win32') then
+        shorten_path=false
+      end
+
       if shorten_path then
         display = utils.path_shorten(display)
       end
