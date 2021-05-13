@@ -93,22 +93,16 @@ do
     mt_file_entry.display = function(entry)
       -- Revert session files back to paths for easier reading
       -- This affects the display only, a selection still uses the correct file name.
-      local display = ''
-      if vim.fn.has('win32')==1 then
-        local entry_value = entry.value:gsub("%++", ":")
-        entry_value = entry_value:gsub("%%", "/")
-        display = path.make_relative((entry_value), cwd)
-      else
-        display = path.make_relative((entry.value:gsub("%%", "/")), cwd)
-      end
-      -- there problem with telescope path_shorten() for windows
-      if vim.fn.has('win32') then
-        shorten_path=false
-      end
+      local is_win32 = vim.fn.has('win32') == Lib._VIM_TRUE
+      local entry_value = entry.value:gsub("%%", "/")
+      local display = is_win32 and path.make_relative(entry_value:gsub("%++", ":"), cwd) or path.make_relative(entry_value, cwd)
 
-      if shorten_path then
+      -- there problem with telescope path_shorten() for windows
+      -- see https://github.com/nvim-telescope/telescope.nvim/issues/706
+      if shorten_path and not is_win32 then
         display = utils.path_shorten(display)
       end
+
       -- Strip file extensions since sessions always have the same .vim extension.
       local filename_only = display:match("(.+)%..+")
 
