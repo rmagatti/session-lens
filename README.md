@@ -21,14 +21,13 @@ Any plugin manager should do.
 
 Plug
 ```viml
-" Dependencies
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
+" Plugin dependencies
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'rmagatti/auto-session'
 
 Plug 'rmagatti/session-lens'
 ```
+See https://github.com/nvim-telescope/telescope.nvim for it's dependencies
 
 Packer
 ```lua
