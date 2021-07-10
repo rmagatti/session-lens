@@ -51,7 +51,7 @@ require("telescope").load_extension("session-lens")
 Options can be set by calling the setup function, a common option is changing the shorten path behaviour.
 ```lua
 require('session-lens').setup {
-    shorten_path=<true|false>,
+    path_display='shorten',
 }
 ```
 
@@ -59,7 +59,7 @@ Another example would be changing how the dropdown looks, this can be done by se
 The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf)`, so anything supported by `get_dropdown` can be used here as well.
 ```lua
 require('session-lens').setup {
-  shorten_path = false,
+  path_display = 'shorten',
   theme_conf = { border = false },
   previewer = true
 }
