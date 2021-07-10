@@ -10,7 +10,7 @@ local SessionLens = {
 
 local defaultConf = {
   theme_conf = { winblend = 10, border = true },
-  path_display = 'shorten',
+  path_display = {'shorten'},
   previewer = false
 }
 
