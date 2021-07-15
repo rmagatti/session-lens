@@ -1,7 +1,6 @@
 local Lib = require('telescope._extensions.session-lens.session-lens-library')
 local AutoSession = require('auto-session')
 local SessionLensActions = require("telescope._extensions.session-lens.session-lens-actions")
-local conf = require('telescope.config').values
 
 ----------- Setup ----------
 local SessionLens = {
@@ -31,7 +30,17 @@ SessionLens.search_session = function(custom_opts)
   -- Use auto_session_root_dir from the Auto Session plugin
   local cwd = AutoSession.conf.auto_session_root_dir
 
-  local path_display = custom_opts.path_display
+  if custom_opts.shorten_path ~= nil then
+    Lib.logger.error('`shorten_path` config is deprecated, use the new `path_display` config instead')
+    if custom_opts.shorten_path then
+      custom_opts.path_display = {'shorten'}
+    else
+      custom_opts.path_display = nil
+    end
+
+    custom_opts.shorten_path = nil
+  end
+
   local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
   custom_opts["theme_conf"] = nil
 
@@ -50,7 +59,7 @@ SessionLens.search_session = function(custom_opts)
 
   local opts = {
     prompt_title = 'Sessions',
-    entry_maker = Lib.make_entry.gen_from_file({cwd = cwd, path_display = path_display}),
+    -- entry_maker = Lib.make_entry.gen_from_file({cwd = cwd, path_display = path_display}),
     cwd = cwd,
     -- TOOD: support custom mappings?
     attach_mappings = function(_, map)
