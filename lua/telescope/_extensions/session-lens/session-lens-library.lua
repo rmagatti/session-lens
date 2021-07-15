@@ -85,7 +85,7 @@ do
 
     local cwd = vim.fn.expand(opts.cwd or vim.fn.getcwd())
 
-    local shorten_path = opts.shorten_path
+    local path_display = opts.path_display
 
     local mt_file_entry = {}
 
@@ -99,7 +99,7 @@ do
 
       -- there problem with telescope path_shorten() for windows
       -- see https://github.com/nvim-telescope/telescope.nvim/issues/706
-      if shorten_path and not is_win32 then
+      if vim.tbl_contains(path_display, "shorten") and not is_win32 then
         display = utils.path_shorten(display)
       end
 

@@ -10,7 +10,7 @@ local SessionLens = {
 
 local defaultConf = {
   theme_conf = { winblend = 10, border = true },
-  shorten_path = true,
+  path_display = {'shorten'},
   previewer = false
 }
 
@@ -31,7 +31,7 @@ SessionLens.search_session = function(custom_opts)
   -- Use auto_session_root_dir from the Auto Session plugin
   local cwd = AutoSession.conf.auto_session_root_dir
 
-  local shorten_path = custom_opts.shorten_path
+  local path_display = custom_opts.path_display
   local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
   custom_opts["theme_conf"] = nil
 
@@ -50,7 +50,7 @@ SessionLens.search_session = function(custom_opts)
 
   local opts = {
     prompt_title = 'Sessions',
-    entry_maker = Lib.make_entry.gen_from_file({cwd = cwd, shorten_path = shorten_path}),
+    entry_maker = Lib.make_entry.gen_from_file({cwd = cwd, path_display = path_display}),
     cwd = cwd,
     -- TOOD: support custom mappings?
     attach_mappings = function(_, map)
