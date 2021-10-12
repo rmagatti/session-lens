@@ -40,8 +40,14 @@ SessionLens.search_session = function(custom_opts)
     custom_opts.shorten_path = nil
   end
 
-  local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
+  local theme_opts
+  if custom_opts ~= nil then
+      theme_opts = custom_opts.theme(custom_opts.theme_conf)
+  else
+      theme_opts = themes.get_dropdown(custom_opts.theme_conf)
+  end
   custom_opts["theme_conf"] = nil
+  custom_opts["theme"] = nil
 
   -- Ignore last session dir on finder if feature is enabled
   if AutoSession.conf.auto_session_enable_last_session then
