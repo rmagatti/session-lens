@@ -14,13 +14,12 @@ SessionLensActions.source_session = function(prompt_bufnr)
   end, 50)
 end
 
--- TODO: make this refresh the picker and not close it instead
 SessionLensActions.delete_session = function(prompt_bufnr)
-  local selection = action_state.get_selected_entry()
-  actions.close(prompt_bufnr)
-  vim.defer_fn(function ()
+  local current_picker = action_state.get_current_picker(prompt_bufnr)
+  current_picker:delete_selection(function(selection)
     AutoSession.DeleteSession(selection.path)
-  end, 50)
+  end)
 end
+
 
 return SessionLensActions
