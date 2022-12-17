@@ -55,11 +55,12 @@ require('session-lens').setup {
 }
 ```
 
-Another example would be changing how the dropdown looks, this can be done by setting the `theme_conf` in the setup opts.
-The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf)`, so anything supported by `get_dropdown` can be used here as well.
+Another example would be changing how the dropdown looks, this can be done by setting the `theme` and `theme_conf` in the setup options.
+The options in `theme_conf` get passed into `require('telescope.themes').get_dropdown(theme_conf)`, so anything supported by `get_dropdown` (or the function that corresponds to the specified `theme`) can be used here as well.
 ```lua
 require('session-lens').setup {
   path_display = {'shorten'},
+  theme = 'ivy', -- default is dropdown
   theme_conf = { border = false },
   previewer = true
 }
