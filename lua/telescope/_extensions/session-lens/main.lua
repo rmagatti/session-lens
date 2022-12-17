@@ -8,6 +8,7 @@ local SessionLens = {
 }
 
 local defaultConf = {
+  theme = { 'dropdown' },
   theme_conf = { winblend = 10, border = true },
   previewer = false
 }
@@ -40,7 +41,7 @@ SessionLens.search_session = function(custom_opts)
     custom_opts.shorten_path = nil
   end
 
-  local theme_opts = themes.get_dropdown(custom_opts.theme_conf)
+  local theme_opts = themes['get_' .. custom_opts.theme](custom_opts.theme_conf)
 
   -- Ignore last session dir on finder if feature is enabled
   if AutoSession.conf.auto_session_enable_last_session then
