@@ -7,7 +7,7 @@ local SessionLens = {
   conf = {}
 }
 
-local default_theme = "dropdown"
+local default_theme = ""
 
 local defaultConf = {
   theme = default_theme,
@@ -43,13 +43,11 @@ SessionLens.search_session = function(custom_opts)
     custom_opts.shorten_path = nil
   end
 
-	-- error if there is no corresponding function for the user-specified theme in telescope.themes
-	if not themes["get_" .. custom_opts.theme] then
-		Lib.logger.error("invalid theme specified")
-		return
-	end
-
-	local theme_opts = themes["get_" .. custom_opts.theme](custom_opts.theme_conf)
+  -- error if there is no corresponding function for the user-specified theme in telescope.themes
+  local theme_opts = {}
+  if themes["get_" .. custom_opts.theme] then
+    theme_opts = themes["get_" .. custom_opts.theme](custom_opts.theme_conf)
+  end
 
   -- Ignore last session dir on finder if feature is enabled
   if AutoSession.conf.auto_session_enable_last_session then
