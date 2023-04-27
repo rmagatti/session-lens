@@ -1,6 +1,6 @@
 local path = require('plenary.path')
 local AutoSession = require('auto-session')
-local AutoSessionLib = require('auto-session-library')
+local AutoSessionLib = require('auto-session.lib')
 
 local Config = {}
 local Lib = {
