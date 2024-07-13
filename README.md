@@ -40,6 +40,17 @@ use {
 }
 ```
 
+Lazy
+```
+return {
+  'rmagatti/session-lens',
+  dependencies = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+  config = function()
+    require('session-lens').setup({--[[your custom config--]]})
+  end
+}
+```
+
 The plugin is lazy loaded when calling it for the first time but you can pre-load it with Telescope like this if you'd rather have autocomplete for it off the bat.
 ```lua
 require("telescope").load_extension("session-lens")
